@@ -1,27 +1,38 @@
-<div class="row">
-  <div class="col-xs-12">
-    <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-fluid" style="max-height: 300px;">
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{recipe.name}}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" >Manage Recipe <span class="caret"></span></button>
-      <ul class="dropdown-menu" aria-labelledby="dropdown">
-        <li><a href="#">To Shopping List</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-fluid" style="max-height: 300px;">
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    {{recipe.description}}
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{recipe.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown">Manage Recipe
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu" aria-labelledby="dropdown">
+          <li><a href="#">To Shopping List</a></li>
+          <li><a href="#">Edit Recipe</a></li>
+          <li><a href="#">Delete Recipe</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      {{recipe.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="list-group">
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} -
+          {{ingredient.amount}}</li>
+      </div>
+    </div>
   </div>
 </div>

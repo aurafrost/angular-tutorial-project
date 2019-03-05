@@ -20,6 +20,10 @@ export class RecipeService {
     return this.recipes.slice(); //slice returns a copy rather than the actual array
   }
 
+  getRecipe(id:number){
+    return this.recipes.slice()[id];
+  }
+
   addIngredients(ingredients:Ingredient[]){
     this.service.addIngredients(ingredients);
   }

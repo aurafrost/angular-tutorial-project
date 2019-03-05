@@ -18,4 +18,11 @@ export class ShoppingListService {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
+
+  addIngredients(ingredients:Ingredient[]){
+    // for(let ingredient of ingredients) {
+    //   this.addIngredient(ingredient);
+    // }
+    this.ingredients.push(...ingredients); //"..." called the spread operator. Shortcut that separates an array into single elements
+  }
 }

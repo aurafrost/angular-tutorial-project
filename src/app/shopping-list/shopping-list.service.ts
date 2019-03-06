@@ -24,5 +24,6 @@ export class ShoppingListService {
     //   this.addIngredient(ingredient);
     // }
     this.ingredients.push(...ingredients); //"..." called the spread operator. Shortcut that separates an array into single elements
+    this.ingredientsChanged.emit(this.ingredients.slice());
   }
 }

@@ -1,56 +1,55 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <form>
+      <form [formGroup]="recipeForm">
         <div class="row">
           <div class="col">
             <button class="btn btn-success" type="submit">Save</button>
             <button class="btn btn-danger" type="cancel">Cancel</button>
           </div>
         </div>
-
+        <!-- Name -->
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label for="name">Name</label>
-              <input class="form-control" type="text" id="name">
+              <input class="form-control" formControlName="name" type="text" id="name">
             </div>
           </div>
         </div>
-
+        <!-- Image URL -->
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label for="imagePath">Image URL</label>
-              <input class="form-control" type="text" id="imagePath">
+              <input class="form-control" formControlName="imagePath" type="text" id="imagePath">
             </div>
           </div>
         </div>
-
-
+        <!-- Image -->
         <div class="row">
           <div class="col">
-            <img src="" class="img-responsive">
+            <img src="" class="img-fluid">
           </div>
         </div>
-
+        <!-- Description -->
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea class="form-control" id="description" rows="6"></textarea>
+              <textarea class="form-control" formControlName="description" id="description" rows="6"></textarea>
             </div>
           </div>
         </div>
-
+        <!-- Ingredients List -->
         <div class="row">
-          <div class="col">
-            <div class="row">
+          <div class="col" formArrayName="ingredients">
+            <div class="row" *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i=index;" [formGroupName]="i">
               <div class="col">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="name">
               </div>
               <div class="col">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" formControlName="amount">
               </div>
               <div class="col">
                 <button class="btn btn-danger" type="reset">X</button>

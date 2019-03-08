@@ -20,6 +20,12 @@ export class DataStorageService {
     this.http.get('https://recipe-book-fa3b0.firebaseio.com/recipes.json').subscribe((response)=>{
       const recipes:any = response;
       this.recipeService.updateRecipes(recipes);
+      for(let recipe of recipes){
+        if(!recipe['ingredients']){
+          recipe['ingredients']=[];
+          return recipes;
+        }
+      }
     });
   }
 }

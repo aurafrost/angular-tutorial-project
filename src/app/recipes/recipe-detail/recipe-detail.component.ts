@@ -16,22 +16,26 @@ export class RecipeDetailComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
+    //get id of selected recipe
     const id=this.route.params.subscribe((params:Params)=>{
       this.id=params['id'];
       this.recipe=this.recipeService.getRecipe(this.id);
     })
   }
 
+  //adds ingredients of current recipe to shopping list
   onAddToShoppingList(){
     this.recipeService.addIngredients(this.recipe.ingredients)
   }
 
+  //switch to edit mode(editMode=true) in recipe-edit.ts.
   onEditRecipe(){
     // this.router.navigate(['edit'],{relativeTo:this.route})
     this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route})
   }
 
+  //delete currently selected recipe
   onDeleteRecipe(){
-    
+    this.recipeService.deleteRecipe(this.id);
   }
 }

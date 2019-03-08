@@ -12,11 +12,11 @@
       <ul class="nav navbar-nav navbar-right ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Manage <span class="caret"></span>
+            <button class="btn btn-primary">Manage <div class="caret"></div></button>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item">Save Data</a>
-            <a class="dropdown-item">Fetch Data</a>
+            <a class="dropdown-item" (click)="saveData()" style="cursor: pointer">Save Data</a>
+            <a class="dropdown-item" (click)="fetchData()" style="cursor: pointer">Fetch Data</a>
           </ul>
         </li>
       </ul>

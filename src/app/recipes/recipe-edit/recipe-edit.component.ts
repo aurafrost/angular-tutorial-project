@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
@@ -15,7 +15,8 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-    private recipeService: RecipeService) { }
+    private recipeService: RecipeService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -25,6 +26,7 @@ export class RecipeEditComponent implements OnInit {
     })
   }
 
+  //initialize form
   private initForm() {
     let recipeName = '';
     let recipeImagePath = '';
@@ -56,6 +58,7 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
+  //add new ingredient and fields to form
   addIngredient(){
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
@@ -65,6 +68,7 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  //handles submit for form
   onSubmit(){
     // const recipe=new Recipe(this.recipeForm.value['name'],this.recipeForm.value['description'],this.recipeForm.value['imagePath'],this.recipeForm.value['ingredients']);
     if(this.editMode){
@@ -73,10 +77,16 @@ export class RecipeEditComponent implements OnInit {
     else{
       this.recipeService.addRecipe(this.recipeForm.value);
     }
-    this.resetForm();
+    this.cancelForm();
   }
 
-  resetForm(){
-    this.recipeForm.reset();
+  //navigates route back up one level
+  cancelForm(){
+    this.router.navigate(['../'],{relativeTo: this.route});
+  }
+
+  //deletes ingredient fields (whole row) from selected recipe
+  deleteIngredient(index:number){
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 }

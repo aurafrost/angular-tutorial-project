@@ -1,3 +1,25 @@
-<p>
-  signin works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form (ngSubmit)="signIn(f)" #f="ngForm">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input class="form-control" type="email" id="email" name="email" ngModel>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input class="form-control" type="password" id="password" name="password" ngModel [minlength]=6>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign in</button>
+      </form>
+    </div>
+  </div>
+</div>

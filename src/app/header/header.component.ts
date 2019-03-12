@@ -9,7 +9,7 @@ import { auth } from 'firebase';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loggedIn=false;
+  loggedIn:boolean=false;
 
   constructor(private dataStorageService:DataStorageService,
     private auth:AuthService) { }
@@ -29,4 +29,16 @@ export class HeaderComponent implements OnInit {
     this.dataStorageService.fetchRecipes();
   }
 
+  logout(){
+    this.auth.logout();
+  }
+
+  isAuthenticated(){
+    if(!this.auth.isAuthenticated()){
+      this.loggedIn=false;
+    }
+    else{
+      this.loggedIn=true
+    }
+  }
 }

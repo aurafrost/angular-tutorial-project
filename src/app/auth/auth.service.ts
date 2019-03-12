@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  token='';
+  token = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   //connects to firebase to add user with parameters given
   signUp(email: string, password: string) {
@@ -16,35 +17,49 @@ export class AuthService {
     );
   }
   //signs in using firebase with email and password
-  signIn(email: string, password: string){
-    firebase.auth().signInWithEmailAndPassword(email,password)
-    .then(
-      response=>firebase.auth().currentUser.getIdToken().then(
-        (data:string)=>{
-          console.log(response)
-          this.token=data;
+  signIn(email: string, password: string) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(
+        response => {
+          this.router.navigate([''])
+          firebase.auth().currentUser.getIdToken().then(
+            (data: string) => {
+              // console.log(response)
+              this.token = data;
+              // console.log("Signed in: " + this.token)
+            }
+          )
         }
       )
-    )
-    .catch(
-      error => console.log(error)
-    );
-    console.log("Signed in: "+this.token)
+      .catch(
+        error => console.log(error)
+      );
   }
 
   //get token for authentication
-  getToken(){
+  getToken() {
     firebase.auth().currentUser.getIdToken().then(
-      (data:string)=>{
-        this.token=data;
+      (data: string) => {
+        this.token = data;
       }
     );
     return this.token;
   }
 
   //check for active token. invalid with current versions
-  isAuthenticated(){
-    console.log(this.token)
-    return this.token!=null
+  isAuthenticated() {
+    // console.log("Token Id: " + this.token)
+    if (this.token == '' || this.token == null) {
+      console.log("Authenticated: False")
+      return false;
+    }
+    console.log("Authenticated: True")
+    return true
+  }
+
+  logout() {
+    firebase.auth().signOut();
+    this.token = null;
+    this.router.navigate(['signin'])
   }
 }

@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit{
   title = 'angular-tutorial-project';
-  loadedFeature='recipe'
+  // loadedFeature='recipe'
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
     });
   }
 
-  onNavigate(feature:string){
-    this.loadedFeature=feature;
-  }
+  // onNavigate(feature:string){
+  //   this.loadedFeature=feature;
+  // }
 }
